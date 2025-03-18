@@ -1,8 +1,5 @@
 package com.mdaucodes.fastfoodbackend.product.dtos;
 
-import com.mdaucodes.fastfoodbackend.product.entities.enums.FoodCategory;
-import com.mdaucodes.fastfoodbackend.product.entities.enums.ProductStatus;
-
 import java.math.BigDecimal;
 
 
@@ -11,26 +8,38 @@ public class ProductModel {
     private String productDescription;
     private BigDecimal productPrice;
     private BigDecimal discountPrice;
-    private String Ingredients;
     private Integer availableQuantity;
-    private FoodCategory foodCategory;
-    private ProductStatus productStatus;
+    private String foodCategory;
+    private String productStatus;
+    private IngredientsDTORequest ingredientsDTORequest;
 
     public ProductModel() {
     }
 
     public ProductModel(String productName, String productDescription, BigDecimal productPrice,
-                        BigDecimal discountPrice, String ingredients, Integer availableQuantity,
-                        FoodCategory foodCategory, ProductStatus productStatus) {
+                        BigDecimal discountPrice, Integer availableQuantity,
+                        String foodCategory, String productStatus) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
         this.discountPrice = discountPrice;
-        Ingredients = ingredients;
         this.availableQuantity = availableQuantity;
         this.foodCategory = foodCategory;
         this.productStatus = productStatus;
     }
+
+    public ProductModel(String productName, String productDescription, BigDecimal productPrice, BigDecimal discountPrice,
+                        Integer availableQuantity, String foodCategory, String productStatus, IngredientsDTORequest request) {
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.productPrice = productPrice;
+        this.discountPrice = discountPrice;
+        this.availableQuantity = availableQuantity;
+        this.foodCategory = foodCategory;
+        this.productStatus = productStatus;
+        this.ingredientsDTORequest = request;
+    }
+
 
     public String getProductName() {
         return productName;
@@ -64,14 +73,6 @@ public class ProductModel {
         this.discountPrice = discountPrice;
     }
 
-    public String getIngredients() {
-        return Ingredients;
-    }
-
-    public void setIngredients(String ingredients) {
-        Ingredients = ingredients;
-    }
-
     public Integer getAvailableQuantity() {
         return availableQuantity;
     }
@@ -80,19 +81,27 @@ public class ProductModel {
         this.availableQuantity = availableQuantity;
     }
 
-    public FoodCategory getFoodCategory() {
+    public String getFoodCategory() {
         return foodCategory;
     }
 
-    public void setFoodCategory(FoodCategory foodCategory) {
+    public void setFoodCategory(String foodCategory) {
         this.foodCategory = foodCategory;
     }
 
-    public ProductStatus getProductStatus() {
+    public String getProductStatus() {
         return productStatus;
     }
 
-    public void setProductStatus(ProductStatus productStatus) {
+    public void setProductStatus(String productStatus) {
         this.productStatus = productStatus;
+    }
+
+    public IngredientsDTORequest getIngredientsDTORequest() {
+        return ingredientsDTORequest;
+    }
+
+    public void setIngredientsDTORequest(IngredientsDTORequest ingredientsDTORequest) {
+        this.ingredientsDTORequest = ingredientsDTORequest;
     }
 }

@@ -10,13 +10,54 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
+
 public class CustomerComplaints {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long complaintId;
     private UUID customerUuid;
+    private UUID productUuid;
     private String complaint;
+
+    public CustomerComplaints() {
+    }
+
+    public CustomerComplaints(Long complaintId, UUID customerUuid, UUID productUuid, String complaint) {
+        this.complaintId = complaintId;
+        this.customerUuid = customerUuid;
+        this.productUuid = productUuid;
+        this.complaint = complaint;
+    }
+
+    public Long getComplaintId() {
+        return complaintId;
+    }
+
+    public void setComplaintId(Long complaintId) {
+        this.complaintId = complaintId;
+    }
+
+    public UUID getCustomerUuid() {
+        return customerUuid;
+    }
+
+    public void setCustomerUuid(UUID customerUuid) {
+        this.customerUuid = customerUuid;
+    }
+
+    public UUID getProductUuid() {
+        return productUuid;
+    }
+
+    public void setProductUuid(UUID productUuid) {
+        this.productUuid = productUuid;
+    }
+
+    public String getComplaint() {
+        return complaint;
+    }
+
+    public void setComplaint(String complaint) {
+        this.complaint = complaint;
+    }
 }

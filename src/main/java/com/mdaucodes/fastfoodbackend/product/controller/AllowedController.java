@@ -31,13 +31,13 @@ public class AllowedController {
     public List<ProductDTO> fetchProductsByNameOrDescription(@PathVariable("parameter")String searchString){
         return productService.fetchProductsByNameOrDescription(searchString);
     }
-    @GetMapping("/fetchProductsByPriceAscending/{price}")
-    public List<ProductDTO> fetchProductsByPriceAscending(@PathVariable("price")BigDecimal lowestPrice){
-        return productService.fetchProductsByPriceAscending(lowestPrice);
+    @GetMapping("/fetchProductsByPriceAscending/{name}")
+    public List<ProductDTO> fetchProductsByPriceAscending(@PathVariable("name")String name){
+        return productService.fetchProductsByPriceAscending(name);
     }
-    @GetMapping("/fetchProductsByPriceDescending/{price}")
-    public List<ProductDTO> fetchProductsByPriceDescending(@PathVariable("price")BigDecimal highestPrice){
-        return productService.fetchProductsByPriceDescending(highestPrice);
+    @GetMapping("/fetchProductsByPriceDescending/{name}")
+    public List<ProductDTO> fetchProductsByPriceDescending(@PathVariable("name")String name){
+        return productService.fetchProductsByPriceDescending(name);
     }
 
 }

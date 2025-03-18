@@ -4,6 +4,9 @@ import com.mdaucodes.fastfoodbackend.product.entities.enums.FoodCategory;
 import com.mdaucodes.fastfoodbackend.product.entities.enums.ProductStatus;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class ProductDTO {
@@ -12,7 +15,7 @@ public class ProductDTO {
     private String productDescription;
     private BigDecimal productPrice;
     private BigDecimal discountPrice;
-    private String Ingredients;
+    private List<IngredientsDTO> Ingredients=new ArrayList<>();
     private Integer availableQuantity;
     private FoodCategory foodCategory;
     private Float productRating;
@@ -22,7 +25,7 @@ public class ProductDTO {
     }
 
     public ProductDTO(UUID productUuid, String productName, String productDescription, BigDecimal productPrice,
-                      BigDecimal discountPrice, String ingredients, Integer availableQuantity, FoodCategory foodCategory,
+                      BigDecimal discountPrice, List<IngredientsDTO> ingredients, Integer availableQuantity, FoodCategory foodCategory,
                       Float productRating, ProductStatus productStatus) {
         this.productUuid = productUuid;
         this.productName = productName;
@@ -76,11 +79,11 @@ public class ProductDTO {
         this.discountPrice = discountPrice;
     }
 
-    public String getIngredients() {
+    public List<IngredientsDTO> getIngredients() {
         return Ingredients;
     }
 
-    public void setIngredients(String ingredients) {
+    public void setIngredients(List<IngredientsDTO> ingredients) {
         Ingredients = ingredients;
     }
 

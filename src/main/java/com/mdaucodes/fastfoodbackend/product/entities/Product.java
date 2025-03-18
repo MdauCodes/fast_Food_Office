@@ -1,12 +1,13 @@
 package com.mdaucodes.fastfoodbackend.product.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mdaucodes.fastfoodbackend.product.entities.enums.FoodCategory;
 import com.mdaucodes.fastfoodbackend.product.entities.enums.ProductStatus;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 public class Product {
@@ -20,8 +21,6 @@ public class Product {
     private BigDecimal productPrice;
     private BigDecimal discountAmount;
 
-    @Column(columnDefinition = "TEXT")
-    private String Ingredients;
     private Integer availableQuantity;
     private FoodCategory foodCategory;
     private LocalDate preparedOn;
@@ -29,43 +28,43 @@ public class Product {
     private LocalDate createdOn;
     private ProductStatus productStatus;
 
+    @ManyToMany(
+            mappedBy = "products"
+    )
+    @JsonIgnore
+    private List<CustomerOrder> customerOrderList = new ArrayList<>();
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            orphanRemoval = true,
+            mappedBy = "products"
+    )
+    @JsonIgnore
+    private List<ProductIngredients> ingredientsList = new ArrayList<>();
+
     public Product() {
     }
 
-    public Product(UUID productUuid, String productName, String productDescription, BigDecimal productPrice,
-                   BigDecimal discountPrice, String ingredients, Integer availableQuantity, FoodCategory foodCategory,
-                   LocalDate preparedOn, Float productRating, LocalDate createdOn, ProductStatus productStatus) {
-        this.productUuid = productUuid;
-        this.productName = productName;
-        this.productDescription = productDescription;
-        this.productPrice = productPrice;
-        this.discountAmount = discountPrice;
-        Ingredients = ingredients;
-        this.availableQuantity = availableQuantity;
-        this.foodCategory = foodCategory;
-        this.preparedOn = preparedOn;
-        this.productRating = productRating;
-        this.createdOn = createdOn;
-        this.productStatus = productStatus;
-    }
-
     public Product(Long productId, UUID productUuid, String productName, String productDescription,
-                   BigDecimal productPrice, BigDecimal discountPrice, String ingredients,
-                   Integer availableQuantity, FoodCategory foodCategory, LocalDate preparedOn, Float productRating,
-                   LocalDate createdOn, ProductStatus productStatus) {
+                   BigDecimal productPrice, BigDecimal discountAmount, Integer availableQuantity,
+                   FoodCategory foodCategory, LocalDate preparedOn, Float productRating,
+                   LocalDate createdOn, ProductStatus productStatus, List<CustomerOrder> customerOrderList,
+                   List<ProductIngredients> ingredientsList) {
         this.productId = productId;
         this.productUuid = productUuid;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
-        this.discountAmount = discountPrice;
-        Ingredients = ingredients;
+        this.discountAmount = discountAmount;
         this.availableQuantity = availableQuantity;
         this.foodCategory = foodCategory;
         this.preparedOn = preparedOn;
         this.productRating = productRating;
         this.createdOn = createdOn;
         this.productStatus = productStatus;
+        this.customerOrderList = customerOrderList;
+        this.ingredientsList = ingredientsList;
     }
 
     public Long getProductId() {
@@ -116,13 +115,7 @@ public class Product {
         this.discountAmount = discountPrice;
     }
 
-    public String getIngredients() {
-        return Ingredients;
-    }
 
-    public void setIngredients(String ingredients) {
-        Ingredients = ingredients;
-    }
 
     public Integer getAvailableQuantity() {
         return availableQuantity;
@@ -170,5 +163,21 @@ public class Product {
 
     public void setProductStatus(ProductStatus productStatus) {
         this.productStatus = productStatus;
+    }
+
+    public List<CustomerOrder> getCustomerOrderList() {
+        return customerOrderList;
+    }
+
+    public void setCustomerOrderList(List<CustomerOrder> customerOrderList) {
+        this.customerOrderList = customerOrderList;
+    }
+
+    public List<ProductIngredients> getIngredientsList() {
+        return ingredientsList;
+    }
+
+    public void setIngredientsList(List<ProductIngredients> ingredientsList) {
+        this.ingredientsList = ingredientsList;
     }
 }
